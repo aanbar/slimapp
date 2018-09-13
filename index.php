@@ -82,6 +82,9 @@ $container['view'] = function (\Slim\Container $c) {
 // collect validation errors using middleware
 $app->add(new App\Middleware\ValidationErrorsMiddleware($container));
 
+// add old form-data collector middleware
+$app->add(new App\Middleware\OldInputMiddleware($container));
+
 // Load routes file
 require_once 'app/routes.php';
 

@@ -4,7 +4,7 @@
     <h1>Example Form</h1>
     <form method="post" action="{{ path_for('home') }}">
         <div class="form-group">
-            <input type="email" name="email" class="form-control{{ errors.email ? ' is-invalid' : '' }}">
+            <input type="email" name="email" class="form-control{{ errors.email ? ' is-invalid' : '' }}" value="{{ old.email }}">
             {%  if errors.email %}
                 <div class="invalid-feedback">{{ errors.email | first }}</div>
             {% endif %}
