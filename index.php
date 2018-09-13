@@ -54,6 +54,11 @@ $container['db'] = function () use ($capsule) {
 // create app instance
 $app = new Slim\App($container);
 
+// Register auth in container
+$container['auth'] = function (){
+    return new App\Auth\Auth;
+};
+
 // register views handler
 $container['view'] = function (\Slim\Container $c) {
     $view = new \Slim\Views\Twig(VIEW_PATH, [
@@ -75,6 +80,12 @@ $container['view'] = function (\Slim\Container $c) {
     });
     // register flash messages in views
     $view->getEnvironment()->addGlobal('flash', $c->flash);
+
+    // register auth in views, add values to avoid querying multiple times
+    $view->getEnvironment()->addGlobal('auth', [
+        'check' => $c->auth->check(),
+        'user'  => $c->auth->user()
+    ]);
 
     return $view;
 };
