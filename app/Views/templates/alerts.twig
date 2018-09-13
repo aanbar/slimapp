@@ -1,0 +1,16 @@
+{% set alerts = {'info': 'info', 'error': 'danger', 'warning': 'warning', 'success': 'success'} %}
+{% for k, v in alerts %}
+    {% if flash.getMessage(k) %}
+        <div class="alert alert-{{ v }}">
+        {% if flash.getMessage(k) is iterable %}
+            {% for error in flash.getMessage(k) %}
+                {% if error is iterable %}
+                    {{ error | first }}
+                {% else %}
+                    {{ error }}
+                {% endif %}
+            {% endfor %}
+        {% endif %}
+        </div>
+    {% endif %}
+{% endfor %}
