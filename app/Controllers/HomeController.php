@@ -22,9 +22,7 @@ class HomeController extends BaseController
         ];
 
         $validation = $this->validator->validate($request, $rules);
-        if ( $validation->failed() ) {
-            $this->flash->addMessage('error', $validation->getError('email'));
-        }else{
+        if ( ! $validation->failed() ) {
             $this->flash->addMessage('success', 'Your application has been submitted');
         }
         return $response->withRedirect($this->router->pathFor('home'));

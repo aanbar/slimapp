@@ -79,6 +79,9 @@ $container['view'] = function (\Slim\Container $c) {
     return $view;
 };
 
+// collect validation errors using middleware
+$app->add(new App\Middleware\ValidationErrorsMiddleware($container));
+
 // Load routes file
 require_once 'app/routes.php';
 
