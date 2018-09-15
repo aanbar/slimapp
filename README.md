@@ -6,7 +6,7 @@ $ composer create-project aanbar/slimapp [app_name]
 $ cd [app_name]
 $ cp .env.example .env
 ```
-Replace `[my-app-name]` with the desired directory name for your new application.
+Replace `[app-name]` with the desired directory name for your new application.
 
 Edit your `.env` file and begin working!
 
