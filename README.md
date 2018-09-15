@@ -2,11 +2,13 @@
 
 ## Usage
 ```bash
-$ git clone https://github.com/aanbar/slimapp [app_name]
+$ composer create-project aanbar/slimapp [app_name]
 $ cd [app_name]
-$ composer install
-$ rm -rf .git
+$ cp .env.example .env
 ```
+Replace `[my-app-name]` with the desired directory name for your new application.
+
+Edit your `.env` file and begin working!
 
 ## Includes
 - Auto resolve controllers in routes using: ``ControllerName:Method``
