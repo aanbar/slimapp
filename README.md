@@ -17,3 +17,4 @@ $ rm -rf .git
 - Form validation using [Respect](https://github.com/respect/validation)
 - Validation errors & old input data are injected into views automatically
 - Built-in authentication system with Auth & Guest Middleware
+- Automatic Csrf check with `csrf.field` in twig views + custom exclusion list in middleware 

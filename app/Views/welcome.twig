@@ -9,6 +9,7 @@
                 <div class="invalid-feedback">{{ errors.email | first }}</div>
             {% endif %}
         </div>
+        {{ csrf.field | raw }}
         <button class="btn btn-primary">Submit</button>
     </form>
 Home Twig Template

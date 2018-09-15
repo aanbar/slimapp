@@ -16,6 +16,7 @@ session_start();
 $container = new App\Core\Container([
     'settings' => [
         'displayErrorDetails' => env('APP_ENV', 'local') === 'local' ? true : false,
+        'determineRouteBeforeAppMiddleware' => true,
         'db' => [
             'driver'    => env('DB_CONNECTION', 'mysql'),
             'host'      => env('DB_HOST', 'localhost'),
@@ -59,6 +60,16 @@ $container['auth'] = function (){
     return new App\Auth\Auth;
 };
 
+// Inject Csrf into container
+$container['csrf'] = function () {
+    $guard = new \Slim\Csrf\Guard();
+    $guard->setFailureCallable(function ($request, $response, $next) {
+        $request = $request->withAttribute("csrf_status", false);
+        return $next($request, $response);
+    });
+    return $guard;
+};
+
 // register views handler
 $container['view'] = function (\Slim\Container $c) {
     $view = new \Slim\Views\Twig(VIEW_PATH, [
@@ -95,6 +106,12 @@ $app->add(new App\Middleware\ValidationErrorsMiddleware($container));
 
 // add old form-data collector middleware
 $app->add(new App\Middleware\OldInputMiddleware($container));
+
+// register csrf middleware
+$app->add(new App\Middleware\CsrfHandlerMiddleware($container));
+$app->add($container->csrf);
+
+
 
 // Load routes file
 require_once 'app/routes.php';

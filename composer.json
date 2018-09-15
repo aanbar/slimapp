@@ -5,7 +5,8 @@
         "illuminate/database": "^5.7",
         "vlucas/phpdotenv": "^2.5",
         "slim/flash": "^0.4.0",
-        "respect/validation": "^1.1"
+        "respect/validation": "^1.1",
+        "slim/csrf": "^0.8.3"
     },
     "autoload": {
       "psr-4": {
